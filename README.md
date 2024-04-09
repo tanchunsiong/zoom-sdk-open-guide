@@ -28,12 +28,37 @@ Rest API
 
 ### Types of Apps
 
+The types of application which can be used to access REST API are as follow
+
+- OAuth App
+- Meeting SDK
+- Server to Server OAuth
+- General App
+
+| Apps used to access REST API     | Classification                         | What it is?                   | Official Guide                                 |
+|---------------------------------------|--------------------------------|-------------------------------|------------------------------------------------|
+| OAuth App                   | Legacy              | Application which uses the OAuth 2.0 flow to get REST API access token   | [TBD]()             |
+| Meeting SDK App             | Legacy              | Meeting SDK + OAuth App  | [TBD]()             |
+| Server to Server OAuth App  |  Current            | Access to Zoom Product's Data   | [TBD]()             |
+| General App                 | Current             | Latest All-in-one App Type  | [TBD]()             |
+
 ### Types of Levels
+
+- User Level
+- Account Level
+
+### Commonly asked questions related to REST API
+
+- Will upgrading/conversion of my legacy app break production?
 
 Meeting SDK
 -----------
 
 ### Meeting SDK 
+
+### Commonly asked questions related to Meeting SDK
+
+- Why did my Meeting SDK App suddenly stopped working?
 
 Video SDK
 ---------
