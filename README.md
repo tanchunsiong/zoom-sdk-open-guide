@@ -13,11 +13,19 @@ Different Types of Developer Products
 | Specific Zoom Developer Product       | Basics                         | What it is?                   | Official Guide                                 |
 |---------------------------------------|--------------------------------|-------------------------------|------------------------------------------------|
 | [Zoom REST API](#)                    | [REST API](#)                  | Access to Zoom Product's Data   | [Zoom REST API](https://developers.zoom.us/docs/api/)             |
-| [Zoom Meeting SDK](#)                 | [REST API](#)                  | Web, Desktop and Mobile Clients to join Zoom Meeting  | [Zoom Meeting SDK](https://developers.zoom.us/docs/meeting-sdk/)             |
-| [Zoom Video SDK](#)                   | [REST API](#)                  | Web, Desktop and Mobile Clients to join Video Session | [Zoom Video SDK](https://developers.zoom.us/docs/video-sdk/)             |
+| [Zoom Meeting SDK](#)                 | [Meeting SDK](#Meeting SDK)                  | Web, Desktop and Mobile Clients to join Zoom Meeting  | [Zoom Meeting SDK](https://developers.zoom.us/docs/meeting-sdk/)             |
+| [Zoom Video SDK](#)                   | [Video SDK](#Video SDK)                  | Web, Desktop and Mobile Clients to join Video Session | [Zoom Video SDK](https://developers.zoom.us/docs/video-sdk/)             |
 
 High Level Information
 ----------------------
 
 ### When to use what products
 
+Rest API
+--------
+
+Meeting SDK
+-----------
+
+Video SDK
+---------
