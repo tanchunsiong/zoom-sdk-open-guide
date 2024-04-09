@@ -61,6 +61,7 @@ Meeting SDK
 ### Commonly asked questions related to Meeting SDK
 
 - Why did my Meeting SDK App suddenly stopped working?
+- [How to collect logs on Meeting SDK](https://developers.zoom.us/blog/msdk-log-retrieval-instructions/)?
 
 ### Commonly asked code samples related to Meeting SDK
 
