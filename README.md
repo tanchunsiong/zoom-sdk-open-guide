@@ -35,7 +35,7 @@ The types of application which can be used to access REST API are as follow
 - Server to Server OAuth
 - General App
 
-| Apps used to access REST API     | Classification                         | What it is?                   | Official Guide                                 |
+| Apps used to access REST API     | Status                         | What it is?                   | Official Guide                                 |
 |---------------------------------------|--------------------------------|-------------------------------|------------------------------------------------|
 | OAuth App                   | Legacy              | Application which uses the OAuth 2.0 flow to get REST API access token   | [TBD]()             |
 | Meeting SDK App             | Legacy              | Meeting SDK + OAuth App  | [TBD]()             |
