@@ -51,6 +51,8 @@ The types of application which can be used to access REST API are as follow
 
 - Will upgrading/conversion of my legacy app break production?
 
+### Commonly asked code samples related to REST API
+
 Meeting SDK
 -----------
 
@@ -60,7 +62,11 @@ Meeting SDK
 
 - Why did my Meeting SDK App suddenly stopped working?
 
+### Commonly asked code samples related to Meeting SDK
+
 Video SDK
 ---------
 
 ### Video SDK
+
+### Commonly asked code samples related to Video SDK
