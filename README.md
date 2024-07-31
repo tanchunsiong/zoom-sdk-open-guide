@@ -70,6 +70,7 @@ Meeting SDK
 1. How do I force a Meeting to end after xx number of minutes?
 2. How do I calculate number of minutes used in a month?
 3. [How do I create a web service which will help to generate a Meeting SDK Auth token?](https://github.com/zoom/meetingsdk-auth-endpoint-sample)
+4. [How do I create a Python CLI app which will generate a Meeting SDK Auth Token](https://github.com/tanchunsiong/zoom-sdk-jwt-signature-generator)
 
 Video SDK
 ---------
@@ -77,3 +78,4 @@ Video SDK
 ### Commonly asked code samples related to Video SDK
 1. How do I force a Session to end after xx number of minutes?
 2.  How do I calculate number of minutes used in a month?
+3.  [How do I create a Python CLI app which will generate a Video SDK Auth Token](https://github.com/tanchunsiong/zoom-sdk-jwt-signature-generator)
