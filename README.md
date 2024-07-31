@@ -28,7 +28,7 @@ Rest API
 
 ### Types of Apps
 
-The types of application which can be used to access REST API are as follow
+The types of application which can retrieve access token, used for REST API are as follow
 
 - OAuth App
 - Meeting SDK
@@ -37,10 +37,10 @@ The types of application which can be used to access REST API are as follow
 
 | Apps used to access REST API     | Status                         | What it is?                   | Official Guide                                 |
 |---------------------------------------|--------------------------------|-------------------------------|------------------------------------------------|
-| OAuth App                   | Legacy              | Application which uses the OAuth 2.0 flow to get REST API access token   | [TBD]()             |
-| Meeting SDK App             | Legacy              | Meeting SDK + OAuth App  | [TBD]()             |
-| Server to Server OAuth App  |  Current            | Access to Zoom Product's Data   | [TBD]()             |
-| General App                 | Current             | Latest All-in-one App Type  | [TBD]()             |
+| OAuth App                   | Legacy              | OAuth 2.0 flow to get REST API access token   | [TBD]()             |
+| Meeting SDK App             | Legacy              | Meeting SDK + OAuth 2.0 flow to get REST API token  | [TBD]()             |
+| Server to Server OAuth App  | Current             | S2S OAuth flow to get REST API access token   | [TBD]()             |
+| General App                 | Current             | All-in-one App Type which includes  OAuth 2.0 flow to get REST API access token  | [TBD]()             |
 
 ### Types of Levels
 
@@ -58,7 +58,7 @@ Meeting SDK
 ### Meeting SDK 
 
 ### Commonly asked code samples related to Meeting SDK
-
+1. How do I force a Meeting to end after xx number of minutes?
 
 Video SDK
 ---------
@@ -66,3 +66,4 @@ Video SDK
 ### Video SDK
 
 ### Commonly asked code samples related to Video SDK
+1. How do I force a Session to end after xx number of minutes?
