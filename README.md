@@ -1,4 +1,4 @@
-The open guide to Zoom Developer Products
+The open guide to Zoom SDK, API and Webhook
 =========================================
 
 This open guide is an unofficial guide to Zoom's Developer Product. The intention of this guide is to provide a code centric and use-case centric approach. This is by no means an exhausive guide, and updates to this guide is best effort. 
