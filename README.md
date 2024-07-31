@@ -47,9 +47,8 @@ The types of application which can be used to access REST API are as follow
 - User Level
 - Account Level
 
-### Commonly asked questions related to REST API
-
-- Will upgrading/conversion of my legacy app break production?
+REST API
+-----------
 
 ### Commonly asked code samples related to REST API
 
@@ -58,12 +57,8 @@ Meeting SDK
 
 ### Meeting SDK 
 
-### Commonly asked questions related to Meeting SDK
-
-- Why did my Meeting SDK App suddenly stopped working?
-- [How to collect logs on Meeting SDK](https://developers.zoom.us/blog/msdk-log-retrieval-instructions/)?
-
 ### Commonly asked code samples related to Meeting SDK
+
 
 Video SDK
 ---------
