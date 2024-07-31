@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample code for common scenarios for Zoom Meeting SDK, Zoom OAuth App, Webhooks and REST API</title>
+<style>
+/* Styles for the tab control */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.tabcontent:first-child {
+  display: block;
+}
+</style>
+
+ <!-- Include Prism.js library -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+ <!-- Include Prism.js CSS for your preferred theme -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+
+</head>
+<body>
+
+<h1>Sample code for common scenarios with Zoom API / Zoom SDK</h1>
+    <p>This page showcases commonly asked scenarios, and code samples to achieve these scenarios using JavaScript and NodeJS</p>
+
+<h2>Github Link</h2>
+
+<a href="">github source code</a> <br/>
+<h2>Live Demo</h2>
+<div id="data"></div>
+
+    <br/>
+    <br/>
+    <h2>Code Samples</h2>
+<div class="tab">
+  <a href="#ending-meeting-after-x-minutes"><button class="tablinks" onclick="openTab(event, 'ending-meeting-after-x-minutes')">Stopping / Ending Zoom Meeting after X minutes</button></a>
+  <a href="#get-number-of-participants-in-meeting"><button class="tablinks" onclick="openTab(event, 'get-number-of-participants-in-meeting')">get number of participants in meeting</button></a></button></a>
+  <a href="#"><button class="tablinks" onclick="openTab(event, '')">Tab</button></a></button></a>
+  <a href="#"><button class="tablinks" onclick="openTab(event, '')">Tab</button></a></button></a>
+  <a href="#"><button class="tablinks" onclick="openTab(event, '')">Tab</button></a></button></a>
+  <a href="#"><button class="tablinks" onclick="openTab(event, '')">Tab</button></a></button></a>
+  <a href="#nodeJS-cron-job"><button class="tablinks" onclick="openTab(event, 'nodeJS-cron-job')">Cron Job in NodeJS</button></a></button></a>
+  <a href="#Tab8"><button class="tablinks" onclick="openTab(event, 'Tab8')">Unused</button></a>
+</div>
+
+
+<div id="ending-meeting-after-x-minutes" class="tabcontent">
+  <h3>Tab 1 Content</h3>
+
+  <pre>
+   <code class="language-javascript">
+// Function to stop meeting (example)
+function stopMeeting(meetingID) {
+  // Add your code to stop the meeting here
+  console.log("Stopping meeting...");
+  
+ fetchBearerToken().then(accesstoken=>{
+    var verb='PUT';
+    var url = `https://api.zoom.us/v2/meetings/${meetingID}/status`;
+    
+    const payloadObject = {
+      action: 'end'
+    };
+    // Convert the object to a JSON string
+    var payload = JSON.stringify(payloadObject);
+    makeApiRequestWithToken(accesstoken,url,payload,verb);
+
+  });
+ 
+}
+</code>
+</pre>
+  
+</div>
+
+<div id="get-number-of-participants-in-meeting" class="tabcontent">
+  <h3>Tab 2 Content</h3>
+  <pre>
+    <code class="language-javascript">
+      
+// Function to get participant count in LIVE meeting (example)
+function getParticipantCountInMeeting(meetingID) {
+  // Add your code to stop the meeting here
+  console.log("Stopping meeting...");
+  
+ fetchBearerToken().then(accesstoken=>{
+    var verb='GET';
+    var url = `https://api.zoom.us/v2/metrics/meetings/${meetingID}?type=live`;
+    
+    const payloadObject = {
+      action: 'end'
+    };
+    // Convert the object to a JSON string
+    var payload = JSON.stringify(payloadObject);
+    makeApiRequestWithToken(accesstoken,url,payload,verb);
+
+  });
+ 
+}
+
+    </code>
+  </pre>
+</div>
+
+<div id="" class="tabcontent">
+  <h3>Tab 3 Content</h3>
+ <pre>
+    <code class="language-javascript">
+
+
+</code>
+</pre>
+</div>
+
+
+<div id="" class="tabcontent">
+  <h3>Tab 4 Content</h3>
+  <pre>
+    <code class="language-javascript">
+    </code>
+  </pre>
+</div>
+
+
+<div id="get-refresh-token" class="tabcontent">
+  <h3>Tab 5 Content</h3>
+  <pre>
+    <code class="language-javascript">
+    </code>
+  </pre>
+</div>
+
+
+<div id="" class="tabcontent">
+<h3>Tab 6 Content</h3>
+<pre>
+  <code class="language-javascript">
+  </code>
+</pre>
+</div>
+
+
+
+<div id="nodeJS-cron-job" class="tabcontent">
+<h3>Tab 7 Content</h3>
+<pre>
+  <code class="language-javascript">
+    // Define a queue to hold task objects
+const taskQueue = [];
+
+
+function addTask(deadline, meetingID,  taskFunction) {
+  taskQueue.push({ deadline, meetingID, taskFunction });
+}
+
+function processTasks() {
+  console.log('Running cron loop');
+  setInterval(() => {
+    const now = new Date();
+    for (let i = taskQueue.length - 1; i >= 0; i--) {
+      const task = taskQueue[i];
+      const now = new Date();
+      const utcNow = new Date(now.toISOString()); // Convert now to UTC format
+      // Get the end time as a Date object
+       const endTime = new Date(task.deadline);
+
+      // Check if the end time has passed
+      if (endTime <= utcNow) {
+        // Check if task.taskFunction is a function before calling it
+        if (typeof task.taskFunction === 'function') {
+          // Call task.taskFunction with meetingID as an argument
+          task.taskFunction(task.meetingID);
+          // Remove executed task from the queue
+          taskQueue.splice(i, 1);
+        } else {
+          console.error('task.taskFunction is not a function');
+        }
+      }
+    }
+  }, 1000); // Check every second
+}
+
+// Example usage
+addTask('Tue, 16 Apr 2024 06:34:56 GMT', '9898533313', stopMeeting);
+
+// Start processing tasks
+processTasks();
+  </code>
+</pre>
+</div>
+
+
+
+<div id="" class="tabcontent">
+<h3>Tab 8 Content</h3>
+  <pre>
+    <code class="language-javascript">
+    </code>
+</pre>
+
+  
+</div>
+
+
+<script>
+function openTab(evt, tabName) {
+  // Get all elements with class="tabcontent" and hide them
+  var tabcontent = document.getElementsByClassName("tabcontent");
+  for (var i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  var tablinks = document.getElementsByClassName("tablinks");
+  for (var i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Check if there's a hash in the URL and open the corresponding tab
+window.onload = function() {
+  var hash = window.location.hash;
+  if (hash) {
+    var tabName = hash.substring(1);
+    var tab = document.getElementById(tabName);
+    if (tab) {
+      var evt = document.createEvent("MouseEvents");
+      evt.initEvent("click", true, true);
+      document.querySelector("button.tablinks").dispatchEvent(evt);
+    }
+  }
+};
+</script>
+
+</body>
+</html>
