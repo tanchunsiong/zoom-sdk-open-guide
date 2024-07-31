@@ -23,6 +23,8 @@ High Level Information
 
 ### When to use what products
 
+This open guide provides you with code samples on how to achieve commonly asked scenarios using a combination of the above mentioned Zoom Developer Products.
+
 Rest API
 --------
 
