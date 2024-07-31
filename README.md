@@ -7,7 +7,7 @@ This guide will by no means, compare the features and capabilities with other si
 
 Disclaimer: The main contributor of this open guide works for Zoom
 
-Common Types of Developer Products used in this Repo
+Common Types of Developer Products used in this guide
 =====================================
 
 | Specific Zoom Developer Product       | Basics                         | What it is?                   | Official Guide                                 |
