@@ -61,15 +61,18 @@ These levels only applies to Meeting SDK. Video SDK has "Account Level" access
 
 
 ### Commonly asked code samples related to REST API
+1. How do I download a cloud recording?
 
 Meeting SDK
 -----------
 
 ### Commonly asked code samples related to Meeting SDK
 1. How do I force a Meeting to end after xx number of minutes?
+2. How do I calculate number of minutes used in a month?
 
 Video SDK
 ---------
 
 ### Commonly asked code samples related to Video SDK
 1. How do I force a Session to end after xx number of minutes?
+2.  How do I calculate number of minutes used in a month?
