@@ -69,6 +69,7 @@ Meeting SDK
 ### Commonly asked code samples related to Meeting SDK
 1. How do I force a Meeting to end after xx number of minutes?
 2. How do I calculate number of minutes used in a month?
+3. [How do I create a web service which will help to generate a Meeting SDK Auth token?](https://github.com/zoom/meetingsdk-auth-endpoint-sample)
 
 Video SDK
 ---------
