@@ -28,7 +28,6 @@ This open guide provides you with code samples on how to achieve commonly asked 
 Rest API
 --------
 
-### Rest API
 
 The Zoom Open API or Zoom REST API allow developers to access account and/or user specific data by going through the OAuth flow or Server to Server OAuth flow.
 You will often need a combination of REST API calls + In-Meeting (Meeting SDK) or In-Session (Video SDK)  API calls to achieve your use-cases.
@@ -55,23 +54,17 @@ The types of application which can retrieve access token, used for REST API are 
 - User Level
 - Account Level
 
-REST API
------------
 
 ### Commonly asked code samples related to REST API
 
 Meeting SDK
 -----------
 
-### Meeting SDK 
-
 ### Commonly asked code samples related to Meeting SDK
 1. How do I force a Meeting to end after xx number of minutes?
 
 Video SDK
 ---------
-
-### Video SDK
 
 ### Commonly asked code samples related to Video SDK
 1. How do I force a Session to end after xx number of minutes?
