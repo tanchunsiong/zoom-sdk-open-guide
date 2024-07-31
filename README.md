@@ -41,6 +41,7 @@ The types of application which can retrieve access token, used for REST API are 
 - Meeting SDK
 - Server to Server OAuth
 - General App
+- Video SDK App
 
 | Apps used to access REST API     | Status                         | What it is?                   | Official Guide                                 |
 |---------------------------------------|--------------------------------|-------------------------------|------------------------------------------------|
@@ -52,6 +53,8 @@ The types of application which can retrieve access token, used for REST API are 
 |Video SDK App| Current | Video SDK App, which provides Client ID and Client Secret to generate Video SDK REST API access token|
 
 ### Types of Levels
+
+These levels only applies to Meeting SDK. Video SDK has "Account Level" access
 
 - User Level
 - Account Level
