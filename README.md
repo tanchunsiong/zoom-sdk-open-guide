@@ -48,6 +48,8 @@ The types of application which can retrieve access token, used for REST API are 
 | Meeting SDK App             | Legacy              | Meeting SDK + OAuth 2.0 flow to get REST API token  | [TBD]()             |
 | Server to Server OAuth App  | Current             | S2S OAuth flow to get REST API access token   | [TBD]()             |
 | General App                 | Current             | All-in-one App Type which includes  OAuth 2.0 flow to get REST API access token  | [TBD]()             |
+||||
+|Video SDK App| Current | Video SDK App, which provides Client ID and Client Secret to generate Video SDK REST API access token|
 
 ### Types of Levels
 
