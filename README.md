@@ -26,6 +26,10 @@ Rest API
 
 ### Rest API
 
+The Zoom Open API or Zoom REST API allow developers to access account and/or user specific data by going through the OAuth flow or Server to Server OAuth flow.
+You will often need a combination of REST API calls + In-Meeting (Meeting SDK) or In-Session (Video SDK)  API calls to achieve your use-cases.
+The Meeting SDK and Video SDK has different sets of REST API, do refer to the correct base URL when making API calls to these endpoints.
+
 ### Types of Apps
 
 The types of application which can retrieve access token, used for REST API are as follow
