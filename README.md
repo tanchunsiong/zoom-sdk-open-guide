@@ -62,6 +62,7 @@ These levels only applies to Meeting SDK. Video SDK has "Account Level" access
 
 ### Commonly asked code samples related to REST API
 1. How do I download a cloud recording?
+2. How do i retrieve a list of all Meeting (past and scheduled)?
 
 Meeting SDK
 -----------
