@@ -3,11 +3,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const crypto = require('crypto')
 const cors = require('cors')
-const KJUR = require('jsrsasign')
+//const KJUR = require('jsrsasign')
 
 const fs = require('fs');
-const path = require('path');
-const jwt = require('jsonwebtoken');
+//const path = require('path');
+//const jwt = require('jsonwebtoken');
 const { resolveNaptr, resolveSoa } = require('dns')
 
 const app = express()
@@ -15,7 +15,7 @@ const port = process.env.PORT || 4848
 
 const axios = require('axios');
 
-const cron = require('node-cron');
+//const cron = require('node-cron');
 
 app.use(bodyParser.json(), cors())
 app.options('*', cors())
@@ -24,7 +24,7 @@ app.options('*', cors())
 // Function to stop meeting (example)
 function stopMeeting(meetingID) {
   // Add your code to stop the meeting here
-  console.log("Stopping meeting...");
+  console.log("Starting procedure for stopping meeting...");
   
  fetchBearerToken().then(accesstoken=>{
     var verb='PUT';
@@ -68,6 +68,7 @@ const taskQueue = [];
 
 
 function addTask(deadline, meetingID,  taskFunction) {
+  console.log('Adding task');
   taskQueue.push({ deadline, meetingID, taskFunction });
 }
 
@@ -108,6 +109,7 @@ processTasks();
 // Function to fetch a bearer token
 async function fetchBearerToken() {
   try {
+    console.log('Fetching bearer token...');
     // Create a Basic Authorization header with client credentials
     const credentials = Buffer.from(`${process.env.ZOOM_S2S_CLIENT_ID}:${process.env.ZOOM_S2S_CLIENT_SECRET}`).toString('base64');
     const apiUrl = `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${process.env.ZOOM_S2S_ACCOUNTID}`;
@@ -138,7 +140,7 @@ async function fetchBearerToken() {
 // Function to make a REST API request using the bearer token
 async function makeApiRequestWithToken(bearerToken,url,payload,verb) {
   try {
-
+    console.log('Making API request...');
 
     //const apiUrl = `https://api.zoom.us/v2/meetings/${meetingNumber}/jointoken/local_recording`;
     
@@ -175,8 +177,8 @@ async function makeApiRequestWithToken(bearerToken,url,payload,verb) {
   
   // Define a function to handle webhook requests
 function handleWebhookRequest(req, res, secretToken, path) {
-
- var filePath ="/var/www/cron.asdc.cc/"+path+".txt"
+console.log('Handling webhook request...');
+var filePath = path.join(__dirname, 's2soauthwebhook.txt');
   if (req.method === 'POST') {
 
   // Check if the event type is "endpoint.url_validation"
@@ -190,7 +192,7 @@ function handleWebhookRequest(req, res, secretToken, path) {
       "encryptedToken": hashForValidate
     });
 
-  //if this is an event
+  //if this is an webhook event
   } else {
     // Write the request data to a file
     fs.writeFile(filePath, JSON.stringify(req.body), 'utf8', function (err) {
@@ -210,7 +212,7 @@ function handleWebhookRequest(req, res, secretToken, path) {
          const scheduledTime = new Date(eventTime.getTime() + 40 * 60000); // Add 40 minutes to event time
 
         
-         var meetingID = req.body.payload.object.id;
+        var meetingID = req.body.payload.object.id;
         var startTimeString = req.body.payload.object.start_time;
 
         // Parse the start time string into a Date object
@@ -234,9 +236,6 @@ function handleWebhookRequest(req, res, secretToken, path) {
         // Handle unknown event types
         console.log(`Unknown event type: ${req.body.event}`);
     }
-
-
-
     res.status(200).send();
   }
 
@@ -265,19 +264,8 @@ function handleWebhookRequest(req, res, secretToken, path) {
 
 
 
-app.post('/webhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_WEBHOOK_SECRET_TOKEN,"webhook");});
-app.get('/webhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_WEBHOOK_SECRET_TOKEN,"webhook");});
-app.post('/msdkwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_MSDKWEBHOOK_SECRET_TOKEN,"msdkwebhook");});
-app.get('/msdkwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_MSDKWEBHOOK_SECRET_TOKEN,"msdkwebhook");});
-app.post('/vsdkwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_VSDK_WEBHOOK_SECRET_TOKEN,"vsdkwebhook");  });
-app.get('/vsdkwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_VSDK_WEBHOOK_SECRET_TOKEN,"vsdkwebhook");});
-app.post('/oauthwebhookaccountlevel/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_OAUTH_ACCOUNTLEVEL_WEBHOOK_SECRET_TOKEN,"oauthwebhookaccountlevel");});
-app.get('/oauthwebhookaccountlevel/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_OAUTH_ACCOUNTLEVEL_WEBHOOK_SECRET_TOKEN,"oauthwebhookaccountlevel");});
-app.post('/oauthwebhookuserlevel/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_OAUTH_USERLEVEL_WEBHOOK_SECRET_TOKEN,"oauthwebhookuserlevel");});
-app.get('/oauthwebhookuserlevel/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_OAUTH_USERLEVEL_WEBHOOK_SECRET_TOKEN,"oauthwebhookuserlevel");});
-app.post('/s2soauthwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_S2SOAUTH_WEBHOOK_SECRET_TOKEN,"s2soauthwebhook");});
-app.get('/s2soauthwebhook/', (req, res) => { handleWebhookRequest(req,res, process.env.ZOOM_S2SOAUTH_WEBHOOK_SECRET_TOKEN,"s2soauthwebhook"); });
-      
+app.post('/s2soauthwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_S2SOAUTH_WEBHOOK_SECRET_TOKEN,"webhook");});
+app.get('/s2soauthwebhook/', (req, res) => {handleWebhookRequest(req,res, process.env.ZOOM_S2SOAUTH_WEBHOOK_SECRET_TOKEN,"webhook");});
 
 
 app.get('/', (req, res) => {
@@ -285,9 +273,6 @@ app.get('/', (req, res) => {
   res.set('Content-Type', 'text/html');
   res.send(htmlFile);
 });
-
-
-
 
 
 app.listen(port, () => console.log(`Running Node.js Sample App on port ${port}!`))
