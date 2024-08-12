@@ -4,14 +4,13 @@ const bodyParser = require('body-parser')
 const crypto = require('crypto')
 const cors = require('cors')
 
-const fs = require('fs');;
+const fs = require('fs');
 const { resolveNaptr, resolveSoa } = require('dns')
 
 const app = express()
 const port = process.env.PORT || 4848
 
 const axios = require('axios');
-
 
 app.use(bodyParser.json(), cors())
 app.options('*', cors())
@@ -36,6 +35,7 @@ function stopMeeting(meetingID) {
   });
  
 }
+
 
 // Define a queue to hold task objects
 const taskQueue = [];
@@ -72,6 +72,9 @@ function processTasks() {
     }
   }, 1000); // Check every second
 }
+
+// Example usage
+addTask('Tue, 16 Apr 2024 06:34:56 GMT', '9898533313', stopMeeting);
 
 // Start processing tasks
 processTasks();
@@ -175,7 +178,32 @@ var filePath = path.join(__dirname, 's2soauthwebhook.txt');
 
     switch (req.body.event) {
       case 'meeting.started':
-     
+        
+        // Handle "meeting.started" event
+        // add an event to stop meeting in 40 mins
+         // Calculate the time for scheduling the task
+         const eventTime = new Date(req.body.payload.object.start_time);
+         const scheduledTime = new Date(eventTime.getTime() + process * 60000); // Add 40 minutes to event time
+
+        
+        var meetingID = req.body.payload.object.id;
+        var startTimeString = req.body.payload.object.start_time;
+
+        // Parse the start time string into a Date object
+        const startTime = new Date(startTimeString);
+
+        // Convert the start time to UTC
+        const startTimeUTC = new Date(startTime.getTime() + startTime.getTimezoneOffset() * 60000);
+
+        // Add 40 minutes to the start time
+        const endTimeUTC = new Date(startTimeUTC.getTime() + process.env.LIMIT_MINUTES * 60000);
+
+        // Format the end time in ISO 8601 format
+        const endTimeString = endTimeUTC.toISOString();
+
+         // Add a task with the calculated cron expression
+         addTask(endTimeString, meetingID, stopMeeting);
+
         break;
       // Add cases for other event types if needed
       default:

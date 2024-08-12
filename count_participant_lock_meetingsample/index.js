@@ -3,8 +3,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const crypto = require('crypto')
 const cors = require('cors')
+//const KJUR = require('jsrsasign')
 
-const fs = require('fs');;
+const fs = require('fs');
 const { resolveNaptr, resolveSoa } = require('dns')
 
 const app = express()
@@ -12,30 +13,35 @@ const port = process.env.PORT || 4848
 
 const axios = require('axios');
 
-
 app.use(bodyParser.json(), cors())
 app.options('*', cors())
 
 
-// Function to stop meeting (example)
-function stopMeeting(meetingID) {
+
+// Function to get participant count in LIVE meeting (example)
+async function getParticipantCountInMeeting(meetingID) {
   // Add your code to stop the meeting here
-  console.log("Starting procedure for stopping meeting...");
+  console.log("Counting Participants...");
   
- fetchBearerToken().then(accesstoken=>{
-    var verb='PUT';
-    var url = `https://api.zoom.us/v2/meetings/${meetingID}/status`;
+ fetchBearerToken().then(async accesstoken=>{
+    var verb='GET';
+    var url = `https://api.zoom.us/v2/metrics/meetings/${meetingID}?type=live`;
     
     const payloadObject = {
-      action: 'end'
+    
     };
     // Convert the object to a JSON string
     var payload = JSON.stringify(payloadObject);
-    makeApiRequestWithToken(accesstoken,url,payload,verb);
-
+    var response =  await makeApiRequestWithToken(accesstoken,url,payload,verb);
+    
+    if (response.hasOwnProperty('participants')) {
+      const participantCount = response.participants;
+      console.log(`Participant Count: ${participantCount}`);
+    }
   });
  
 }
+
 
 // Define a queue to hold task objects
 const taskQueue = [];
@@ -72,6 +78,7 @@ function processTasks() {
     }
   }, 1000); // Check every second
 }
+
 
 // Start processing tasks
 processTasks();
@@ -127,16 +134,16 @@ async function makeApiRequestWithToken(bearerToken,url,payload,verb) {
       data: payload,
     };
 
-    axios(apiRequestData)
+    return axios(apiRequestData)
     .then(response => {
       // Log the response
       console.log('Response status:', response.status);
       // Resolve the promise with the response data
-    
+      return response.data;
     }).catch(error => {
       console.error('Error making API request:', error.message);
       // Reject the promise with the error
-      reject(error);
+      throw error;
     });
  
   } catch (error) {
@@ -147,7 +154,7 @@ async function makeApiRequestWithToken(bearerToken,url,payload,verb) {
 
   
   // Define a function to handle webhook requests
-function handleWebhookRequest(req, res, secretToken, path) {
+async function handleWebhookRequest(req, res, secretToken, path) {
 console.log('Handling webhook request...');
 var filePath = path.join(__dirname, 's2soauthwebhook.txt');
   if (req.method === 'POST') {
@@ -175,7 +182,34 @@ var filePath = path.join(__dirname, 's2soauthwebhook.txt');
 
     switch (req.body.event) {
       case 'meeting.started':
+        break;
+
+      case 'meeting.participant_joined':
+        if (req.body.payload && req.body.payload.object) {
+          // Extract the meeting ID
+          const meetingId = req.body.payload.object.id;
+          var numberOfParticipants= await getParticipantCountInMeeting(meetingId);
+          console.log(`Meeting ID: ${meetingId}`);
+          if (numberOfParticipants >= process.env.LIMIT_PARTICIPANTS){
+          //call api to change passcode
+
+          }
+        }
      
+        break;
+
+      case 'meeting.participant_left':
+        if (req.body.payload && req.body.payload.object) {
+          // Extract the meeting ID
+          const meetingId = req.body.payload.object.id;
+          var numberOfParticipants= await getParticipantCountInMeeting(meetingId);
+          console.log(`Meeting ID: ${meetingId}`);
+          if (numberOfParticipants < process.env.LIMIT_PARTICIPANTS){
+            //call api to change passcode
+  
+            }
+
+        }
         break;
       // Add cases for other event types if needed
       default:
